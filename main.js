@@ -7,6 +7,33 @@ const character = {
     damageHP: 100,
     elHP: document.getElementById('health-character'),
     elProgressbar: document.getElementById('progressbar-character'),
+
+    renderHP: function(){
+        this.renderHPLife();
+        this.renderProgressbarHP();
+    },
+    
+    renderHPLife: function(){
+        this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP + ' HP';
+     
+    },
+    renderProgressbarHP: function () {
+            this.elProgressbar.style.width = this.damageHP + '%';
+    },
+    changeHP: function (count){
+        if (this.damageHP < count){
+            this.damageHP = 0;
+            alert('Бедный ' + this.name + ' проиграл бой!');
+            $btn.disabled = true;
+            $btn1.disabled = true;
+            $btn2.disabled = true;
+        }else {
+            this.damageHP -= count;
+        }
+     
+    
+        this.renderHP();
+    }
 }
 
 const enemy = {
@@ -15,60 +42,62 @@ const enemy = {
     damageHP: 100,
     elHP: document.getElementById('health-enemy'),
     elProgressbar: document.getElementById('progressbar-enemy'),
+
+    renderHP: function(){
+        this.renderHPLife();
+        this.renderProgressbarHP();
+    },
+    
+    renderHPLife: function(){
+        this.elHP.innerText = this.damageHP + ' / ' + this.defaultHP + ' HP';
+     
+    },
+    renderProgressbarHP: function () {
+            this.elProgressbar.style.width = this.damageHP + '%';
+    },
+    changeHP: function (count){
+        if (this.damageHP < count){
+            this.damageHP = 0;
+            alert('Бедный ' + this.name + ' проиграл бой!');
+            $btn.disabled = true;
+            $btn1.disabled = true;
+            $btn2.disabled = true;
+        }else {
+            this.damageHP -= count;
+        }
+     
+    
+        this.renderHP();
+    }
 }
 
 $btn.addEventListener('click', function() {
     console.log('Kick');
-    changeHP(random(20), character);
-    changeHP(random(20), enemy);
+    character.changeHP(random(20));
+    enemy.changeHP(random(20));
 });
 $btn1.addEventListener('click', function() {
     console.log('Explosion!');
     
-    changeHP(30, character);
-    changeHP(30, enemy);
+    character.changeHP(30);
+    enemy.changeHP(30);
   
 });
 $btn2.addEventListener('click', function() {
     console.log('One punch left');
     character.damageHP = 1;
     enemy.damageHP = 1;
-    renderHP(character);
-    renderHP(enemy);
+    character.renderHP();
+    enemy.renderHP();
 });
 
 function init(){
     console.log('Start Game!');
-    renderHP(character);
-    renderHP(enemy);
+    character.renderHP();
+    enemy.renderHP();
   
 }
-function renderHP(person){
-    renderHPLife(person);
-    renderProgressbarHP(person);
-}
 
-function renderHPLife(person){
-    person.elHP.innerText = person.damageHP + ' / ' + person.defaultHP + ' HP';
- 
-}
-function renderProgressbarHP(person) {
-        person.elProgressbar.style.width = person.damageHP + '%';
-}
-function changeHP(count, person){
-    if (person.damageHP < count){
-        person.damageHP = 0;
-        alert('Бедный' + person.name + ' проиграл бой!');
-        $btn.disabled = true;
-        $btn1.disabled = true;
-        $btn2.disabled = true;
-    }else {
-        person.damageHP -= count;
-    }
- 
-
-    renderHP(person);
-}
 function random(num){
     return Math.ceil(Math.random() * num);
 }
