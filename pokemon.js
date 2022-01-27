@@ -28,8 +28,8 @@ class character extends Selectors{
     renderProgressbarHP=  ()=> {
             this.elProgressbar.style.width = this.damageHP + '%';
     }
-    changeHP=  (count)=>{
-
+    changeHP=  (count,enemy)=>{
+        const $logs = document.querySelector('#logs');
         if (this.damageHP < count){
             this.damageHP = 0;
             alert('Бедный ' + this.name + ' проиграл бой!');
@@ -39,7 +39,8 @@ class character extends Selectors{
         }else {
             this.damageHP -= count;
         }
-        const log = this === enemy ? generateLog(character, this,count) : generateLog (enemy, this,count);
+       // const log = this === enemy ? generateLog(character, this,count) : generateLog (enemy, this,count);
+       const log = generateLog(enemy,this,count);
         //console.log(log);
         const $p = document.createElement('p');
         $p.innerText = log;
