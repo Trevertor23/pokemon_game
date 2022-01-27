@@ -12,5 +12,6 @@ function generateLog(firstPerson,secondPerson,damage){
         `${firstPerson.name} пытался что-то сказать, но вдруг, неожиданно ${secondPerson.name} со скуки, разбил бровь сопернику. Damage:-${damage} :  [${secondPerson.damageHP}/${secondPerson.defaultHP}]`
     ];
 
-    return logs[random(logs.length)-1];
+    //return logs[random(logs.length)-1];
+    return logs[Math.ceil(Math.random() * logs.length)-1];
 }
