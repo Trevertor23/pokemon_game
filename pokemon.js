@@ -2,18 +2,23 @@ class Selectors {
     constructor(name){
         this.elHP = document.getElementById(`health-${name}`);
         this.elProgressbar = document.getElementById(`progressbar-${name}`);
-        console.log(name);
+        this.elPhoto = document.getElementById(`img-${name}`);
+        
     }
 }
 class character extends Selectors{
-    constructor({name,dhp,type,selectors}) {
+    constructor({img,name,hp,type,selectors,attacks = []}) {
         super(selectors);
+        this.img = img;
         this.name = name;
-        this.defaultHP = dhp;
-        this.damageHP = dhp;
+        this.defaultHP = hp;
+        this.damageHP = hp;
         this.type = type;
+
+        this.attacks = attacks;
         
         this.renderHP();
+        this.elPhoto.src = this.img;
     }
     renderHP =  ()=>{
         this.renderHPLife();
